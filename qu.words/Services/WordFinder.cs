@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using MoreLinq;
 using Qu.Words.Exceptions;
 
 namespace Qu.Words.Services
@@ -23,19 +21,11 @@ namespace Qu.Words.Services
             Dictionary<string, int> repeatedWordCount = new Dictionary<string, int>();
 
             Validate();
-            var matrixTransposed = TransformColumnsInRows();
-
             foreach (var stream in wordStream)
             {
-                foreach (var row in _matrix)
-                {
-                    CountWord(repeatedWordCount, stream, CountSubstring(row, stream));
-                }
+                CountFromRows(repeatedWordCount, stream);
 
-                foreach (var row in matrixTransposed)
-                {
-                    CountWord(repeatedWordCount, stream, CountSubstring(row, stream));
-                }
+                CountFromColumns(repeatedWordCount, stream);
             }
 
             return repeatedWordCount.OrderByDescending(o => o.Value).Take(MaxNumberOfElements).Select(s => s.Key);
@@ -66,9 +56,29 @@ namespace Qu.Words.Services
             return count;
         }
 
-        private IEnumerable<string> TransformColumnsInRows()
+        private void CountFromRows(Dictionary<string, int> repeatedWordCount, string stream)
         {
-            return _matrix.Transpose().Select(s => new string(s.Select(x => x).ToArray()));
+            foreach (var row in _matrix)
+            {
+                CountWord(repeatedWordCount, stream, CountSubstring(row, stream));
+            }
+        }
+
+        private void CountFromColumns(Dictionary<string, int> repeatedWordCount, string stream)
+        {
+            var matrixToList = _matrix.ToList();
+            var numberOfRows = _matrix.Count();
+            var numberOfColumns = _matrix.First().Length;
+            for (int i = 0; i < numberOfColumns; ++i)
+            {
+                string tempString = string.Empty;
+                for (int j = 0; j < numberOfRows; ++j)
+                {
+                    char temp = matrixToList[j][i];
+                    tempString = string.Concat(tempString, temp);
+                }
+                CountWord(repeatedWordCount, stream, CountSubstring(tempString, stream));
+            }
         }
 
         private void Validate()
@@ -97,7 +107,5 @@ namespace Qu.Words.Services
         }
 
         #endregion
-
-
     }
 }
