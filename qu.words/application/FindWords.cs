@@ -8,7 +8,7 @@ namespace qu.words.application
 {
     public static class FindWords
     {
-        public class Request : IRequest<IEnumerable<Word>>
+        public class Request : IRequest<IEnumerable<string>>
         {
             private readonly IEnumerable<string> Rows;
 
@@ -18,16 +18,16 @@ namespace qu.words.application
             }
         }
 
-        public class Handler : IRequestHandler<Request, IEnumerable<Word>>
+        public class Handler : IRequestHandler<Request, IEnumerable<string>>
         {
             public Handler()
             {
             }
 
-            public async Task<IEnumerable<Word>> Handle(Request request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<string>> Handle(Request request, CancellationToken cancellationToken)
             {
 
-                return new List<Word>();
+                return new List<string>();
             }
         }
     }
