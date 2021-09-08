@@ -11,13 +11,7 @@ namespace qu.words.contracts.words
 
         public class Response
         {
-            public IEnumerable<WordsResults> Results { get; set; }
-        }
-
-        public class WordsResults
-        {
-            public int Count { get; set; }
-            public string Word { get; set; }
+            public IEnumerable<string> Results { get; set; }
         }
     }
 }

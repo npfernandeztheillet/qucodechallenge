@@ -17,12 +17,12 @@ namespace qu.Controllers
         [HttpPost]
         public async Task<ActionResult<FindWords.Response>> FindWords(FindWords.Request request)
         {
-            IEnumerable<Word> words = await _mediator.Send(new words.application.FindWords.Request(request.Rows));
+            IEnumerable<string> words = await _mediator.Send(new words.application.FindWords.Request(request.Rows));
 
             return Ok(ToContract(words));
         }
 
-        private static IEnumerable<FindWords.Response> ToContract(IEnumerable<Word> records)
+        private static IEnumerable<FindWords.Response> ToContract(IEnumerable<string> records)
         {
             return new List<FindWords.Response>();
         }
