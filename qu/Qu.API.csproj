@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\qu.words.contracts\qu.words.contracts.csproj" />
-    <ProjectReference Include="..\qu.words\qu.words.csproj" />
+    <ProjectReference Include="..\qu.words.contracts\Qu.Words.Contracts.csproj" />
+    <ProjectReference Include="..\qu.words\Qu.Words.csproj" />
   </ItemGroup>
 
 

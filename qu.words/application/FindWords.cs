@@ -2,19 +2,21 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using qu.words.domain;
+using Qu.Words.Services;
 
-namespace qu.words.application
+namespace Qu.Words.Application
 {
     public static class FindWords
     {
         public class Request : IRequest<IEnumerable<string>>
         {
-            private readonly IEnumerable<string> Rows;
+            public IEnumerable<string> Matrix { get; }
+            public IEnumerable<string> WordStream { get; }
 
-            public Request(IEnumerable<string> rows)
+            public Request(IEnumerable<string> matrix, IEnumerable<string> wordStream)
             {
-                Rows = rows;
+                Matrix = matrix;
+                WordStream = wordStream;
             }
         }
 
@@ -26,8 +28,8 @@ namespace qu.words.application
 
             public async Task<IEnumerable<string>> Handle(Request request, CancellationToken cancellationToken)
             {
-
-                return new List<string>();
+                var finder = new WordFinder(request.Matrix);
+                return finder.Find(request.WordStream);
             }
         }
     }

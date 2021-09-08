@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace qu.words.contracts.words
+namespace Qu.Words.Contracts.Words
 {
     public static class FindWords
     {
         public class Request
         {
-            public IEnumerable<string> Rows { get; set; }
-        }
+            public IEnumerable<string> Matrix { get; set; }
 
-        public class Response
-        {
-            public IEnumerable<string> Results { get; set; }
+            public IEnumerable<string> WordStream { get; set; }
         }
     }
 }
