@@ -19,26 +19,26 @@ Shared project library that contains different contract, request and responses.
 Unit test project.
 
 ### Pre-requisites 📋
-#### Docker 
 #### Visual Studio (Code or community)
 #### .Net Core runtime
 
 ## Built with 🛠️
 * Visual studio 2019
-* Docker
 * MediatR
 * FluentAssertions
 * xUnit
 * Swagger
 
 ## Run application locally 🚀
-User can run the application on different ways, using docker compose or using iisexpress.
-For docker compose, stay inside QU folder (qucodechallenge\Qu), run next command in a terminal:
+On root folder, run next command in a terminal:
 ``` bash
-docker-compose up --build
+dotnet run --project ./Qu/Qu.API.csproj
 ```
+After that enter to  http://localhost:5000/swagger
+
 ## Run tests locally 🚀
+On root folder, run next command in a terminal:
 ``` bash
-dotnet test test/Qu.Unit.Test/Qu.Unit.Test.csproj --no-build -c Release
+dotnet test Qu.Unit.Test/Qu.Unit.Test.csproj -c Release
 ```
 
