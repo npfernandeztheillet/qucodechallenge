@@ -18,6 +18,9 @@ namespace Qu.Words.Services
         }
         public IEnumerable<string> Find(IEnumerable<string> wordStream)
         {
+            if (_matrix == null || !_matrix.Any())
+                return new List<string>();
+
             Dictionary<string, int> repeatedWordCount = new Dictionary<string, int>();
 
             Validate();
