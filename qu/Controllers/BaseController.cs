@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace qu.Controllers
+namespace Qu.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

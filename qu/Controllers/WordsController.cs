@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using qu.words.contracts.words;
-using qu.words.domain;
+using Qu.Words.Contracts.Words;
 
-namespace qu.Controllers
+namespace Qu.API.Controllers
 {
     public class WordsController : BaseController<WordsController>
     {
@@ -15,16 +14,11 @@ namespace qu.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<FindWords.Response>> FindWords(FindWords.Request request)
+        public async Task<ActionResult<string>> FindWords(FindWords.Request request)
         {
-            IEnumerable<string> words = await _mediator.Send(new words.application.FindWords.Request(request.Rows));
+            IEnumerable<string> words = await _mediator.Send(new Words.Application.FindWords.Request(request.Matrix, request.WordStream));
 
-            return Ok(ToContract(words));
-        }
-
-        private static IEnumerable<FindWords.Response> ToContract(IEnumerable<string> records)
-        {
-            return new List<FindWords.Response>();
+            return Ok(words);
         }
     }
 }
